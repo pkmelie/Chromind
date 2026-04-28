@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
   <meta name="theme-color" content="#0a0a0f"/>
-  <meta name="description" content="ChrоMind — Le jeu de mémoire de couleurs. Mémorise le pattern, reproduis-le, bats ton record."/>
+  <meta name="description" content="ChroMind — Le jeu de mémoire de couleurs."/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
   <meta name="apple-mobile-web-app-title" content="ChroMind"/>
@@ -14,23 +14,71 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/auth.css"/>
 </head>
 <body>
 
-<!-- SPLASH -->
-<div id="splash" class="screen active">
-  <div class="splash-logo">
-    <div class="logo-grid">
-      <div class="lg-cell" style="background:#ff2d55"></div>
-      <div class="lg-cell" style="background:#0a84ff"></div>
-      <div class="lg-cell" style="background:#30d158"></div>
-      <div class="lg-cell" style="background:#ffd60a"></div>
-    </div>
+<!-- LOADING -->
+<div id="loading" class="screen active">
+  <div class="loading-logo">
+    <div class="logo-grid"><div class="lg-cell" style="background:#ff2d55"></div><div class="lg-cell" style="background:#0a84ff"></div><div class="lg-cell" style="background:#30d158"></div><div class="lg-cell" style="background:#ffd60a"></div></div>
+    <div class="logo-text">ChroMind</div>
+  </div>
+  <div class="loading-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- AUTH LANDING -->
+<div id="auth-landing" class="screen">
+  <div class="auth-hero">
+    <div class="logo-grid lg-big"><div class="lg-cell" style="background:#ff2d55"></div><div class="lg-cell" style="background:#0a84ff"></div><div class="lg-cell" style="background:#30d158"></div><div class="lg-cell" style="background:#ffd60a"></div></div>
     <div class="logo-text">ChroMind</div>
     <div class="logo-sub">memory · color · reflex</div>
   </div>
-  <button class="cta-btn" onclick="App.showHome()">Commencer</button>
-  <div class="splash-hint">Mémorise. Reproduis. Domine.</div>
+  <div class="auth-actions">
+    <button class="cta-btn" onclick="AuthUI.showLogin()">Se connecter</button>
+    <button class="ghost-btn" onclick="AuthUI.showRegister()">Créer un compte</button>
+    <div class="auth-divider"><span>ou</span></div>
+    <button class="google-btn" onclick="Auth.signInWithGoogle()"><svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>Continuer avec Google</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="auth-login" class="screen">
+  <div class="auth-header">
+    <button class="back-btn" onclick="AuthUI.showLanding()">←</button>
+    <div class="auth-title">Connexion</div><div></div>
+  </div>
+  <div class="auth-form">
+    <div class="field-group"><label class="field-label">Email</label><input type="email" id="login-email" placeholder="ton@email.com" autocomplete="email"/></div>
+    <div class="field-group"><label class="field-label">Mot de passe</label><input type="password" id="login-pwd" placeholder="••••••••" autocomplete="current-password"/></div>
+    <div class="auth-error" id="login-error"></div>
+    <button class="cta-btn" id="login-btn" onclick="AuthUI.doLogin()">Se connecter</button>
+    <div class="auth-divider"><span>ou</span></div>
+    <button class="google-btn" onclick="Auth.signInWithGoogle()"><svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>Continuer avec Google</button>
+    <button class="text-link" onclick="AuthUI.showRegister()">Pas de compte ? S'inscrire</button>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div id="auth-register" class="screen">
+  <div class="auth-header">
+    <button class="back-btn" onclick="AuthUI.showLanding()">←</button>
+    <div class="auth-title">Créer un compte</div><div></div>
+  </div>
+  <div class="auth-form">
+    <div class="field-group">
+      <label class="field-label">Pseudo</label>
+      <div class="field-row"><input type="text" id="reg-username" placeholder="TonPseudo" maxlength="18" autocomplete="off" oninput="AuthUI.checkUsernameAvail(this.value)"/><div class="field-check" id="username-check"></div></div>
+      <div class="field-hint">3–18 caractères, lettres et chiffres</div>
+    </div>
+    <div class="field-group"><label class="field-label">Email</label><input type="email" id="reg-email" placeholder="ton@email.com" autocomplete="email"/></div>
+    <div class="field-group"><label class="field-label">Mot de passe</label><input type="password" id="reg-pwd" placeholder="••••••••" autocomplete="new-password"/><div class="field-hint">8 caractères minimum</div></div>
+    <div class="auth-error" id="reg-error"></div>
+    <button class="cta-btn" id="reg-btn" onclick="AuthUI.doRegister()">Créer mon compte</button>
+    <div class="auth-divider"><span>ou</span></div>
+    <button class="google-btn" onclick="Auth.signInWithGoogle()"><svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>Continuer avec Google</button>
+    <button class="text-link" onclick="AuthUI.showLogin()">Déjà un compte ? Se connecter</button>
+  </div>
 </div>
 
 <!-- HOME -->
@@ -38,7 +86,7 @@
   <div class="top-bar">
     <div class="tb-coins"><span class="coin-icon">◈</span><span id="hm-coins">0</span></div>
     <div class="tb-title">ChroMind</div>
-    <button class="tb-btn" onclick="App.showShop()">Boutique</button>
+    <button class="tb-btn" onclick="App.showProfile()" id="hm-username-btn">—</button>
   </div>
   <div class="home-stats">
     <div class="stat-card"><div class="sc-val" id="hm-best">—</div><div class="sc-label">record</div></div>
@@ -47,22 +95,8 @@
   </div>
   <div class="mode-title">Choisis ton mode</div>
   <div class="mode-cards">
-    <div class="mode-card" onclick="App.startGame('4x')">
-      <div class="mode-preview mp-4">
-        <div></div><div></div><div></div><div></div>
-      </div>
-      <div class="mode-name">4 cases</div>
-      <div class="mode-desc">Le classique</div>
-    </div>
-    <div class="mode-card" onclick="App.startGame('9x')">
-      <div class="mode-preview mp-9">
-        <div></div><div></div><div></div>
-        <div></div><div></div><div></div>
-        <div></div><div></div><div></div>
-      </div>
-      <div class="mode-name">9 cases</div>
-      <div class="mode-desc">Expert</div>
-    </div>
+    <div class="mode-card" onclick="App.startGame('4x')"><div class="mode-preview mp-4"><div></div><div></div><div></div><div></div></div><div class="mode-name">4 cases</div><div class="mode-desc">Le classique</div></div>
+    <div class="mode-card" onclick="App.startGame('9x')"><div class="mode-preview mp-9"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div class="mode-name">9 cases</div><div class="mode-desc">Expert</div></div>
   </div>
   <div class="home-bottom">
     <button class="ghost-btn" onclick="App.showLeaderboard()">🏆 Classement</button>
@@ -74,16 +108,11 @@
 <div id="game" class="screen">
   <div class="game-header">
     <button class="back-btn" onclick="App.quitGame()">✕</button>
-    <div class="gh-center">
-      <div class="gh-level" id="g-level">Niveau 1</div>
-      <div class="gh-status" id="g-status">prépare-toi…</div>
-    </div>
+    <div class="gh-center"><div class="gh-level" id="g-level">Niveau 1</div><div class="gh-status" id="g-status">prépare-toi…</div></div>
     <div class="gh-coins"><span class="coin-icon">◈</span><span id="g-coins">0</span></div>
   </div>
   <div class="progress-bar"><div class="progress-fill" id="g-progress"></div></div>
-  <div id="board-wrap">
-    <div id="board"></div>
-  </div>
+  <div id="board-wrap"><div id="board"></div></div>
   <div id="seq-dots"></div>
   <div class="game-footer">
     <div class="gf-stat"><div class="gf-val" id="g-score">0</div><div class="gf-label">score</div></div>
@@ -110,17 +139,21 @@
 <div id="ad" class="screen">
   <div class="ad-wrap">
     <div class="ad-eyebrow">PUBLICITÉ</div>
-    <div class="ad-banner" id="ad-banner">
+    <div class="ad-banner">
       <div class="ad-brand" id="ad-brand"></div>
       <div class="ad-tagline" id="ad-tagline"></div>
-      <div class="ad-fake-img"></div>
+      <div class="ad-fake-img">
+        <!-- REMPLACE PAR TON BLOC ADSENSE :
+        <ins class="adsbygoogle" style="display:block;width:100%;height:250px"
+          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+          data-ad-slot="XXXXXXXXXX"></ins>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script> -->
+        <div style="color:#333;font-size:12px;font-family:Space Mono,monospace;text-align:center;padding:1rem">AdSense placeholder<br><span style="font-size:10px">ca-pub-XXXXXXXX</span></div>
+      </div>
     </div>
     <div class="ad-bottom">
       <div class="ad-reward">Regarde jusqu'au bout → <strong>+30 ◈</strong></div>
-      <div class="ad-timer-row">
-        <div class="ad-timer-bar"><div class="ad-timer-fill" id="ad-fill"></div></div>
-        <div class="ad-timer-num" id="ad-timer">5</div>
-      </div>
+      <div class="ad-timer-row"><div class="ad-timer-bar"><div class="ad-timer-fill" id="ad-fill"></div></div><div class="ad-timer-num" id="ad-timer">5</div></div>
       <button class="cta-btn" id="skip-btn" onclick="App.skipAd()" disabled>Passer</button>
     </div>
   </div>
@@ -128,42 +161,38 @@
 
 <!-- SHOP -->
 <div id="shop" class="screen">
-  <div class="top-bar">
-    <button class="back-btn" onclick="App.closeShop()">←</button>
-    <div class="tb-title">Boutique</div>
-    <div class="tb-coins"><span class="coin-icon">◈</span><span id="sh-coins">0</span></div>
-  </div>
+  <div class="top-bar"><button class="back-btn" onclick="App.closeShop()">←</button><div class="tb-title">Boutique</div><div class="tb-coins"><span class="coin-icon">◈</span><span id="sh-coins">0</span></div></div>
   <div class="shop-section-title">Thèmes de couleurs</div>
   <div class="shop-grid" id="shop-grid"></div>
   <div class="shop-section-title" style="margin-top:1.5rem">Acheter des coins</div>
   <div class="iap-grid">
-    <div class="iap-card" onclick="App.buyCoins(100, 0.99)">
-      <div class="iap-amount">◈ 100</div>
-      <div class="iap-price">0.99€</div>
-    </div>
-    <div class="iap-card" onclick="App.buyCoins(500, 3.99)">
-      <div class="iap-amount">◈ 500</div>
-      <div class="iap-price popular-badge">3.99€ ★</div>
-    </div>
-    <div class="iap-card" onclick="App.buyCoins(1200, 7.99)">
-      <div class="iap-amount">◈ 1200</div>
-      <div class="iap-price">7.99€</div>
-    </div>
+    <div class="iap-card" onclick="App.buyCoins(100,0.99)"><div class="iap-amount">◈ 100</div><div class="iap-price">0.99€</div></div>
+    <div class="iap-card" onclick="App.buyCoins(500,3.99)"><div class="iap-amount">◈ 500</div><div class="iap-price popular-badge">3.99€ ★</div></div>
+    <div class="iap-card" onclick="App.buyCoins(1200,7.99)"><div class="iap-amount">◈ 1200</div><div class="iap-price">7.99€</div></div>
   </div>
 </div>
 
 <!-- LEADERBOARD -->
 <div id="leaderboard" class="screen">
-  <div class="top-bar">
-    <button class="back-btn" onclick="App.showHome()">←</button>
-    <div class="tb-title">Classement</div>
-    <div></div>
-  </div>
-  <div class="lb-your-score">
-    <div class="lby-label">Ton record</div>
-    <div class="lby-val" id="lb-my-best">—</div>
-  </div>
+  <div class="top-bar"><button class="back-btn" onclick="App.showHome()">←</button><div class="tb-title">Classement</div><div></div></div>
+  <div class="lb-your-score"><div class="lby-label">Ton record</div><div class="lby-val" id="lb-my-best">—</div></div>
+  <div id="lb-loading" style="padding:2rem;text-align:center;color:#555;font-family:Space Mono,monospace;font-size:12px">chargement…</div>
   <div id="lb-list"></div>
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="screen">
+  <div class="top-bar"><button class="back-btn" onclick="App.showHome()">←</button><div class="tb-title">Profil</div><button class="tb-btn" onclick="AuthUI.doLogout()" style="color:#e24b4a;font-size:12px">Déconnexion</button></div>
+  <div class="profile-card">
+    <div class="profile-avatar" id="prof-avatar">?</div>
+    <div class="profile-username" id="prof-username">—</div>
+    <div class="profile-email" id="prof-email">—</div>
+  </div>
+  <div class="profile-stats">
+    <div class="stat-card"><div class="sc-val" id="prof-best">—</div><div class="sc-label">record</div></div>
+    <div class="stat-card"><div class="sc-val" id="prof-games">0</div><div class="sc-label">parties</div></div>
+    <div class="stat-card"><div class="sc-val" id="prof-coins">0</div><div class="sc-label">coins</div></div>
+  </div>
 </div>
 
 <!-- STRIPE MODAL -->
@@ -173,25 +202,21 @@
     <div class="modal-sub" id="modal-sub"></div>
     <div class="modal-stripe-logo">stripe</div>
     <div class="modal-fields">
-      <input type="text" placeholder="Numéro de carte" maxlength="19" id="card-num" oninput="Stripe.formatCard(this)"/>
-      <div style="display:flex;gap:10px">
-        <input type="text" placeholder="MM/AA" maxlength="5" id="card-exp" style="flex:1" oninput="Stripe.formatExp(this)"/>
-        <input type="text" placeholder="CVV" maxlength="3" id="card-cvv" style="flex:1"/>
-      </div>
+      <input type="text" placeholder="Numéro de carte" maxlength="19" id="card-num" oninput="StripeUI.formatCard(this)"/>
+      <div style="display:flex;gap:10px"><input type="text" placeholder="MM/AA" maxlength="5" id="card-exp" style="flex:1" oninput="StripeUI.formatExp(this)"/><input type="text" placeholder="CVV" maxlength="3" id="card-cvv" style="flex:1"/></div>
       <input type="text" placeholder="Nom sur la carte"/>
     </div>
-    <button class="cta-btn" onclick="Stripe.pay()">Payer</button>
+    <button class="cta-btn" onclick="StripeUI.pay()">Payer</button>
     <button class="ghost-btn" onclick="App.closeModal()" style="margin-top:8px">Annuler</button>
     <div class="modal-secure">🔒 Paiement sécurisé par Stripe</div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/auth-ui.js"></script>
 <script src="js/app.js"></script>
 <script src="js/stripe.js"></script>
-<script>
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
-  }
-</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
 </body>
 </html>
