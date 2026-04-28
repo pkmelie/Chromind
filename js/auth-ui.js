@@ -1,5 +1,18 @@
 'use strict';
 
+// Fonction pour afficher une section et cacher les autres
+function show(sectionId) {
+  // Liste de toutes tes sections (ID correspondants dans ton HTML)
+  const sections = ['loading', 'auth-landing', 'auth-login', 'auth-register', 'home', 'game-container'];
+  
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = (id === sectionId) ? 'block' : 'none';
+    }
+  });
+}
+
 // ── Debounce helper ──
 let usernameTimer = null;
 
