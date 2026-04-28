@@ -1,0 +1,146 @@
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a0a0f;font-family:'Syne',sans-serif;color:#f0f0f5}
+.screen{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:#0a0a0f}
+.screen.active{display:flex;flex-direction:column;align-items:center}
+
+/* ─── SPLASH ─── */
+#splash{justify-content:center;gap:2rem;padding:2rem}
+.splash-logo{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:72px;height:72px}
+.lg-cell{border-radius:8px}
+.logo-text{font-size:42px;font-weight:800;letter-spacing:-2px;color:#f0f0f5}
+.logo-sub{font-size:12px;letter-spacing:4px;color:#666;text-transform:uppercase;font-family:'Space Mono',monospace}
+.splash-hint{font-size:12px;color:#444;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase}
+
+/* ─── BUTTONS ─── */
+.cta-btn{width:100%;max-width:320px;padding:16px;border-radius:12px;border:none;background:#f0f0f5;color:#0a0a0f;font-family:'Syne',sans-serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:opacity .15s,transform .1s}
+.cta-btn:active{transform:scale(0.97);opacity:.9}
+.cta-btn:disabled{opacity:.4;cursor:default}
+.ghost-btn{background:transparent;border:1px solid #2a2a35;color:#999;font-family:'Syne',sans-serif;font-size:14px;padding:12px 24px;border-radius:10px;cursor:pointer;letter-spacing:1px;transition:border-color .15s,color .15s}
+.ghost-btn:hover{border-color:#555;color:#f0f0f5}
+
+/* ─── TOP BAR ─── */
+.top-bar{display:flex;align-items:center;justify-content:space-between;width:100%;padding:1rem 1.2rem;border-bottom:1px solid #1a1a25}
+.tb-title{font-size:18px;font-weight:800;letter-spacing:-0.5px}
+.tb-coins{display:flex;align-items:center;gap:5px;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#ffd60a}
+.tb-btn{background:transparent;border:1px solid #2a2a35;color:#aaa;font-family:'Syne',sans-serif;font-size:12px;padding:6px 14px;border-radius:20px;cursor:pointer;letter-spacing:1px}
+.coin-icon{font-size:14px;color:#ffd60a}
+.back-btn{background:transparent;border:none;color:#777;font-size:20px;cursor:pointer;padding:4px 8px;line-height:1}
+
+/* ─── HOME ─── */
+#home{padding-bottom:2rem}
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;padding:1.2rem}
+.stat-card{background:#13131f;border:1px solid #1e1e2e;border-radius:12px;padding:14px 8px;text-align:center}
+.sc-val{font-size:24px;font-weight:800;letter-spacing:-1px;color:#f0f0f5;font-family:'Space Mono',monospace}
+.sc-label{font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.mode-title{font-size:12px;letter-spacing:3px;color:#555;text-transform:uppercase;margin:0.5rem 0 1rem;font-family:'Space Mono',monospace}
+.mode-cards{display:flex;gap:12px;padding:0 1.2rem;width:100%}
+.mode-card{flex:1;background:#13131f;border:1px solid #1e1e2e;border-radius:16px;padding:1.2rem;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:border-color .2s,transform .1s}
+.mode-card:active{transform:scale(0.97)}
+.mode-card:hover{border-color:#333}
+.mode-preview{display:grid;gap:4px;border-radius:8px;overflow:hidden;width:64px;height:64px}
+.mp-4{grid-template-columns:1fr 1fr}
+.mp-9{grid-template-columns:repeat(3,1fr)}
+.mp-4 div,.mp-9 div{border-radius:3px}
+.mode-name{font-size:15px;font-weight:700}
+.mode-desc{font-size:11px;color:#555;letter-spacing:1px}
+.home-bottom{display:flex;gap:10px;padding:1.5rem 1.2rem 0;width:100%}
+.home-bottom .ghost-btn{flex:1;font-size:13px}
+
+/* ─── GAME ─── */
+#game{padding-bottom:1rem}
+.game-header{display:flex;align-items:center;justify-content:space-between;width:100%;padding:.8rem 1rem}
+.gh-center{text-align:center;flex:1}
+.gh-level{font-size:16px;font-weight:800;letter-spacing:-0.5px}
+.gh-status{font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase;font-family:'Space Mono',monospace;margin-top:2px}
+.gh-coins{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:#ffd60a;display:flex;align-items:center;gap:4px;min-width:60px;justify-content:flex-end}
+.progress-bar{width:100%;height:2px;background:#1a1a25}
+.progress-fill{height:100%;background:#f0f0f5;transition:width .3s;border-radius:1px}
+#board-wrap{display:flex;align-items:center;justify-content:center;flex:1;padding:1.5rem 1rem}
+#board{display:grid;gap:10px}
+.tile{border-radius:14px;border:none;outline:none;cursor:pointer;transition:transform .08s;position:relative;overflow:hidden}
+.tile::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .08s}
+.tile.lit{transform:scale(0.91)}
+.tile.lit::after{background:rgba(255,255,255,0.5)}
+.tile.wrong{animation:shake .3s}
+.tile:disabled{cursor:default}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+#seq-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;padding:0 1rem;min-height:12px}
+.sdot{width:8px;height:8px;border-radius:50%;background:#1e1e2e;transition:background .2s}
+.sdot.done{background:#f0f0f5}
+.sdot.current{background:#ffd60a}
+.game-footer{display:flex;justify-content:center;gap:3rem;padding:1rem;width:100%;border-top:1px solid #1a1a25;margin-top:.5rem}
+.gf-stat{text-align:center}
+.gf-val{font-size:22px;font-weight:800;font-family:'Space Mono',monospace;letter-spacing:-1px}
+.gf-label{font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+
+/* ─── GAME OVER ─── */
+#gameover{justify-content:center;padding:2rem}
+.go-content{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;max-width:340px}
+.go-eyebrow{font-size:11px;letter-spacing:4px;color:#555;font-family:'Space Mono',monospace}
+.go-level-reached{font-size:52px;font-weight:800;letter-spacing:-3px;text-align:center;line-height:1}
+.go-sub{font-size:13px;color:#ffd60a;letter-spacing:1px;font-family:'Space Mono',monospace;min-height:18px}
+.go-coins-earned{font-size:13px;color:#555;font-family:'Space Mono',monospace}
+.go-actions{display:flex;flex-direction:column;gap:10px;width:100%}
+.shop-link{background:transparent;border:none;color:#555;font-family:'Syne',sans-serif;font-size:13px;cursor:pointer;padding:8px;letter-spacing:1px;text-decoration:underline;text-underline-offset:3px}
+
+/* ─── AD ─── */
+#ad{justify-content:center;padding:1.5rem}
+.ad-wrap{display:flex;flex-direction:column;gap:1.2rem;width:100%;max-width:340px}
+.ad-eyebrow{font-size:10px;letter-spacing:3px;color:#333;text-transform:uppercase;font-family:'Space Mono',monospace}
+.ad-banner{background:#13131f;border:1px solid #1e1e2e;border-radius:16px;padding:1.5rem;display:flex;flex-direction:column;gap:10px}
+.ad-brand{font-size:22px;font-weight:800;letter-spacing:-1px}
+.ad-tagline{font-size:13px;color:#777;font-family:'Space Mono',monospace}
+.ad-fake-img{height:80px;background:#1a1a25;border-radius:8px;margin-top:4px}
+.ad-bottom{display:flex;flex-direction:column;gap:12px}
+.ad-reward{font-size:12px;color:#777;font-family:'Space Mono',monospace;text-align:center}
+.ad-reward strong{color:#ffd60a}
+.ad-timer-row{display:flex;align-items:center;gap:12px}
+.ad-timer-bar{flex:1;height:4px;background:#1a1a25;border-radius:2px;overflow:hidden}
+.ad-timer-fill{height:100%;background:#f0f0f5;width:100%;transition:width 1s linear;border-radius:2px}
+.ad-timer-num{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;min-width:20px;text-align:right}
+
+/* ─── SHOP ─── */
+#shop{padding-bottom:2rem}
+.shop-section-title{font-size:11px;letter-spacing:3px;color:#555;text-transform:uppercase;font-family:'Space Mono',monospace;width:100%;padding:.8rem 1.2rem .4rem}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 1.2rem;width:100%}
+.shop-item{background:#13131f;border:1px solid #1e1e2e;border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:border-color .15s}
+.shop-item.equipped{border-color:#f0f0f5;border-width:2px}
+.shop-item.owned:not(.equipped){border-color:#2a2a35;opacity:.7}
+.shop-preview{display:grid;gap:3px;border-radius:8px;overflow:hidden}
+.shop-preview.sp-4{grid-template-columns:1fr 1fr;width:56px;height:56px}
+.shop-preview.sp-9{grid-template-columns:repeat(3,1fr);width:56px;height:56px}
+.shop-preview div{border-radius:2px}
+.shop-name{font-size:12px;font-weight:700;letter-spacing:.5px}
+.shop-badge{font-size:11px;font-family:'Space Mono',monospace;color:#ffd60a}
+.shop-badge.owned{color:#555}
+.shop-badge.equipped{color:#f0f0f5}
+.iap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 1.2rem;width:100%}
+.iap-card{background:#13131f;border:1px solid #1e1e2e;border-radius:14px;padding:14px 8px;text-align:center;cursor:pointer;transition:border-color .15s}
+.iap-card:hover{border-color:#333}
+.iap-amount{font-size:16px;font-weight:800;color:#ffd60a;margin-bottom:6px}
+.iap-price{font-size:12px;color:#777;font-family:'Space Mono',monospace}
+.popular-badge{color:#f0f0f5}
+
+/* ─── LEADERBOARD ─── */
+#leaderboard{padding-bottom:2rem}
+.lb-your-score{width:100%;padding:1.2rem;background:#13131f;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;justify-content:space-between}
+.lby-label{font-size:11px;letter-spacing:2px;color:#555;text-transform:uppercase;font-family:'Space Mono',monospace}
+.lby-val{font-size:28px;font-weight:800;font-family:'Space Mono',monospace;letter-spacing:-1px;color:#ffd60a}
+.lb-row{display:flex;align-items:center;gap:12px;padding:14px 1.2rem;border-bottom:1px solid #1a1a25}
+.lb-rank{font-size:14px;font-weight:800;font-family:'Space Mono',monospace;color:#555;min-width:28px}
+.lb-rank.top{color:#ffd60a}
+.lb-name{flex:1;font-size:15px;font-weight:700}
+.lb-score{font-family:'Space Mono',monospace;font-size:14px;color:#aaa}
+.lb-you{background:#13131f}
+
+/* ─── MODAL ─── */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:flex-end;z-index:999}
+.modal-box{background:#13131f;border-radius:20px 20px 0 0;padding:2rem 1.5rem;width:100%;display:flex;flex-direction:column;gap:14px}
+.modal-title{font-size:20px;font-weight:800;letter-spacing:-0.5px}
+.modal-sub{font-size:13px;color:#777;font-family:'Space Mono',monospace}
+.modal-stripe-logo{font-size:28px;font-weight:800;color:#6772e5;letter-spacing:-1px;text-align:center;padding:.5rem}
+.modal-fields{display:flex;flex-direction:column;gap:10px}
+.modal-fields input{background:#0a0a0f;border:1px solid #2a2a35;border-radius:10px;padding:14px;color:#f0f0f5;font-family:'Space Mono',monospace;font-size:14px;width:100%}
+.modal-fields input:focus{outline:none;border-color:#555}
+.modal-secure{font-size:11px;color:#333;text-align:center;font-family:'Space Mono',monospace;letter-spacing:1px}
