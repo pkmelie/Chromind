@@ -5,8 +5,8 @@
 //  Remplace les valeurs ci-dessous par les tiennes
 //  Supabase → Settings → API
 // ─────────────────────────────────────────────
-const SUPABASE_URL  = 'https://cmsciwujeoguivwdnacu.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtc2Npd3VqZW9ndWl2d2RuYWN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDY3NjUsImV4cCI6MjA5Mjk4Mjc2NX0.-vT06xV5kGSbVtDioYrL_oUEHnMvq2XkWK0IdytVFRU';
+const SUPABASE_URL  = 'https://VOTRE_PROJECT_ID.supabase.co';
+const SUPABASE_ANON = 'VOTRE_ANON_KEY';
 
 // Client Supabase (chargé via CDN dans index.html)
 let _sb = null;
