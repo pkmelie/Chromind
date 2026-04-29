@@ -6,7 +6,7 @@
 //  Supabase → Settings → API
 // ─────────────────────────────────────────────
 const SUPABASE_URL  = 'https://cmsciwujeoguivwdnacu.supabase.co';
-const SUPABASE_ANON = 'sb_publishable_Ct_aNdUjcx2ON-moC0Suqg_Kgxf28m-';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtc2Npd3VqZW9ndWl2d2RuYWN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDY3NjUsImV4cCI6MjA5Mjk4Mjc2NX0.-vT06xV5kGSbVtDioYrL_oUEHnMvq2XkWK0IdytVFRU';
 
 // Client Supabase (chargé via CDN dans index.html)
 let _sb = null;
