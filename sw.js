@@ -3,7 +3,10 @@ const ASSETS = [
   '/',
   '/index.html',
   '/css/style.css',
+  '/css/auth.css',
   '/js/app.js',
+  '/js/auth.js',
+  '/js/auth-ui.js',
   '/js/stripe.js',
   '/manifest.json',
 ];
@@ -21,7 +24,14 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  const url = new URL(e.request.url);
+
+  // ⛔ Ne jamais intercepter Supabase, Google, CDN externes
+  if (url.hostname !== self.location.hostname) return;
+
+  // Seulement les GET
   if (e.request.method !== 'GET') return;
+
   e.respondWith(
     caches.match(e.request).then(cached => {
       const network = fetch(e.request).then(res => {
