@@ -59,7 +59,11 @@ function successJingle(){ [523,659,784].forEach((f,i)=>setTimeout(()=>beep(f,120
 
 let gSeq=[],gStep=0,gLevel=0,gScore=0,gMode='4x',gPlaying=false,gWaiting=false,gPrevScreen='home';
 
-function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el){ el.classList.add('active'); }
+}
 function getSkin(){ return SKINS.find(s=>s.id===state.equipped); }
 function skinColors(){ return gMode==='9x'?getSkin().c9:getSkin().c4; }
 function applyColors(){ const cols=skinColors(); document.querySelectorAll('.tile').forEach((t,i)=>t.style.background=cols[i]||'#222'); }
@@ -108,6 +112,7 @@ function updGameHud(){
   document.getElementById('g-progress').style.width=Math.min(100,(gLevel/30)*100)+'%';
 }
 function updHomeHud(){
+  try{const p=Auth&&Auth.profile;const nameEl=document.getElementById('home-username-display');if(nameEl&&p)nameEl.textContent=p.username;}catch(e){}
   document.getElementById('hm-coins').textContent=state.coins;
   document.getElementById('hm-best').textContent=state.best||'—';
   document.getElementById('hm-games').textContent=state.games;

@@ -1,4 +1,4 @@
-const CACHE = 'chromind-v1';
+const CACHE = 'chromind-v2';
 const ASSETS = [
   '/',
   '/index.html',

@@ -16,25 +16,39 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico"/>
   <title>ChroMind</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="stylesheet" href="css/auth.css"/>
 </head>
 <body>
 
+<!-- BG ATMOSPHERE -->
+<canvas id="particle-canvas"></canvas>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
 <!-- LOADING -->
 <div id="loading" class="screen active">
   <div class="loading-logo">
-    <div class="logo-grid"><div class="lg-cell" style="background:#ff2d55"></div><div class="lg-cell" style="background:#0a84ff"></div><div class="lg-cell" style="background:#30d158"></div><div class="lg-cell" style="background:#ffd60a"></div></div>
+    <div class="loading-grid">
+      <div class="lg-cell" style="background:#0070D1"></div>
+      <div class="lg-cell" style="background:#3B9EFF"></div>
+      <div class="lg-cell" style="background:#ffffff"></div>
+      <div class="lg-cell" style="background:#00439C"></div>
+    </div>
     <div class="logo-text">ChroMind</div>
+    <div class="logo-sub">memory · color · reflex</div>
   </div>
-  <div class="loading-dots"><span></span><span></span><span></span></div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
 </div>
 
 <!-- AUTH LANDING -->
 <div id="auth-landing" class="screen">
   <div class="auth-hero">
-    <div class="logo-grid lg-big"><div class="lg-cell" style="background:#ff2d55"></div><div class="lg-cell" style="background:#0a84ff"></div><div class="lg-cell" style="background:#30d158"></div><div class="lg-cell" style="background:#ffd60a"></div></div>
+    <div class="hero-grid"><div class="lg-cell" style="background:#0070D1"></div><div class="lg-cell" style="background:#3B9EFF"></div><div class="lg-cell" style="background:#ffffff"></div><div class="lg-cell" style="background:#00439C"></div></div>
     <div class="logo-text">ChroMind</div>
     <div class="logo-sub">memory · color · reflex</div>
   </div>
@@ -91,6 +105,10 @@
     <div class="tb-coins"><span class="coin-icon">◈</span><span id="hm-coins">0</span></div>
     <div class="tb-title">ChroMind</div>
     <button class="tb-btn" onclick="App.showProfile()" id="hm-username-btn">—</button>
+  </div>
+  <div class="home-hero">
+    <div class="home-greeting">Bienvenue,</div>
+    <div class="home-title"><span id="home-username-display">Joueur</span></div>
   </div>
   <div class="home-stats">
     <div class="stat-card"><div class="sc-val" id="hm-best">—</div><div class="sc-label">record</div></div>
@@ -217,9 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/vfx.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/app.js"></script>      ← app.js en premier = show() existe
 <script src="js/auth-ui.js"></script>
+<script src="js/app.js"></script>
 <script src="js/stripe.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
 </body>
